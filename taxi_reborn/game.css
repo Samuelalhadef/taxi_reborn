@@ -1,0 +1,485 @@
+/* Styles de base et réinitialisation */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* Structure principale du tableau de bord */
+.dashboard {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(165deg, #2a2a2a 0%, #1a1a1a 100%);
+    padding: 20px;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 20px;
+}
+
+/* Effet de texture du tableau de bord */
+.dashboard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255,255,255,0.01) 0px,
+        rgba(255,255,255,0.01) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+}
+
+/* Barre d'état supérieure */
+.status-bar {
+    background: linear-gradient(90deg, #111111 0%, #222222 100%);
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    border: 1px solid #333;
+}
+
+/* Affichage de l'argent */
+.money {
+    font-family: 'Digital-7', monospace;
+    font-size: 28px;
+    color: #33ff33;
+    text-shadow: 0 0 10px rgba(51,255,51,0.4);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 15px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 5px;
+    border: 1px solid #444;
+}
+
+/* Barre de santé mentale */
+.mental-health {
+    width: 200px;
+    background: #000000;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid #444;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.health-fill {
+    height: 20px;
+    background: linear-gradient(90deg, #33ff33, #33ff33 60%, #ffff33 80%, #ff3333 100%);
+    transition: width 0.3s ease;
+}
+
+/* Radio du véhicule */
+.car-radio {
+    background: linear-gradient(135deg, #222222 0%, #1a1a1a 100%);
+    border-radius: 15px;
+    padding: 20px;
+    width: 350px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    border: 1px solid #444;
+}
+
+/* Écran de la radio */
+.radio-screen {
+    background: #000000;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #333;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.8);
+}
+
+.frequency-display {
+    font-family: 'Digital-7', monospace;
+    font-size: 36px;
+    color: #00ff00;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(0,255,0,0.4);
+    letter-spacing: 2px;
+}
+
+.station-name {
+    color: #888888;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 5px;
+    text-transform: uppercase;
+}
+
+/* Contrôles de la radio */
+.radio-knob-container {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+}
+
+.radio-knob {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #666666 0%, #333333 100%);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #888;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    transition: transform 0.1s ease-out;
+}
+
+.radio-knob::after {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    width: 4px;
+    height: 20%;
+    background: #ffffff;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+.radio-knob-scale {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.frequency-number {
+    position: absolute;
+    font-size: 10px;
+    color: #888888;
+    transform-origin: center;
+    width: 20px;
+    text-align: center;
+}
+
+/* Boutons présélection radio */
+.radio-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.radio-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, #444444 0%, #222222 100%);
+    color: #888888;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    border: 1px solid #555;
+}
+
+.radio-button:hover {
+    background: linear-gradient(135deg, #555555 0%, #333333 100%);
+}
+
+.radio-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+/* GPS */
+.gps-screen {
+    background: #000000;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    border: 1px solid #444;
+}
+
+.gps-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.current-location {
+    color: #33ff33;
+    font-size: 14px;
+    font-family: 'Digital-7', monospace;
+}
+
+.gps-status {
+    color: #33ff33;
+    font-size: 12px;
+    padding: 4px 8px;
+    background: rgba(51,255,51,0.1);
+    border-radius: 10px;
+}
+
+.map-container {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #333;
+    height: 300px;
+    background: #222;
+}
+
+/* Téléphone */
+.phone {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1000;
+}
+
+.phone-preview {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, #333333 0%, #222222 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    border: 1px solid #444;
+    transition: transform 0.2s ease;
+}
+
+.phone-preview:hover {
+    transform: scale(1.05);
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #ff3333;
+    color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    border: 1px solid #ff5555;
+}
+
+/* Interface téléphone déplié */
+.phone-expanded {
+    position: absolute;
+    bottom: 80px;
+    right: 0;
+    width: 350px;
+    background: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    transform-origin: bottom right;
+    animation: phoneExpand 0.3s ease-out;
+}
+
+@keyframes phoneExpand {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.phone-header {
+    background: #f8f8f8;
+    padding: 15px;
+    border-bottom: 1px solid #dddddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.phone-header h2 {
+    color: #333333;
+    font-size: 18px;
+}
+
+.close-phone {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #666666;
+    cursor: pointer;
+}
+
+/* Liste des courses */
+.rides-list {
+    max-height: 400px;
+    overflow-y: auto;
+    background: #ffffff;
+}
+
+.ride-preview {
+    padding: 15px;
+    border-bottom: 1px solid #eeeeee;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.ride-preview:hover {
+    background-color: #f5f5f5;
+}
+
+.ride-basic-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #333333;
+}
+
+.arrow {
+    color: #888888;
+}
+
+.estimated-price {
+    margin-left: auto;
+    color: #33aa33;
+    font-weight: bold;
+}
+
+/* Détails d'une course */
+.ride-details {
+    padding: 20px;
+    background: #ffffff;
+    color: #333333;
+}
+
+.client-profile {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.client-profile img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    border: 3px solid #f0f0f0;
+}
+
+.ride-specific-info {
+    background: #f8f8f8;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 15px 0;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.accept-ride,
+.decline-ride {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.accept-ride {
+    background: #33aa33;
+    color: white;
+}
+
+.decline-ride {
+    background: #aa3333;
+    color: white;
+}
+
+.accept-ride:hover,
+.decline-ride:hover {
+    transform: translateY(-2px);
+}
+
+/* Effets visuels généraux */
+.glassmorphism {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Animations */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Effets de reflet */
+.reflection {
+    position: relative;
+    overflow: hidden;
+}
+
+.reflection::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.2),
+        transparent
+    );
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+    
+    .car-radio,
+    .gps-screen {
+        width: 100%;
+    }
+    
+    .phone-expanded {
+        width: 90vw;
+        right: 5vw;
+    }
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAXI Road - Menu Principal</title>
+    <link rel="stylesheet" href="styles/intro.css">
+    <link rel="stylesheet" href="styles/transition.css">
+</head>
+<body>
+    const transitionHTML = `
+<div class="page-transition">
+    <div class="taxi-pattern-container">
+        <div class="taxi-pattern"></div>
+    </div>
+</div>
+    <!-- Écran de chargement -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader"></div>
+        <div class="loading-text">Démarrage du moteur...</div>
+        <div class="loading-progress">0%</div>
+    </div>
+
+    <button id="audioButton" class="audio-button">
+        <div class="audio-icon">
+            <!-- Icône Son On -->
+            <svg class="icon-sound-on" viewBox="0 0 24 24" width="24" height="24">
+                <path d="M12 5v14l-7-7H1V12h4l7-7z" />
+                <path class="sound-wave" d="M15.5 8a5 5 0 0 1 0 8M18.5 5a10 10 0 0 1 0 14" />
+            </svg>
+            <!-- Icône Son Off -->
+            <svg class="icon-sound-off" viewBox="0 0 24 24" width="24" height="24">
+                <path d="M12 5v14l-7-7H1V12h4l7-7z" />
+                <path class="sound-wave" d="M15 9l4 4M19 9l-4 4" />
+            </svg>
+        </div>
+    </button>
+    <audio id="backgroundMusic" loop>
+        <source src="sound/music_ambiance.mp3" type="audio/mp3">
+    </audio>
+    <audio id="rainSound" loop>
+        <source src="sound/rain.mp3" type="audio/mp3">
+    </audio>
+    <audio id="neonSound">
+        <source src="sound/neon.mp3" type="audio/mp3">
+    </audio>
+    <!-- Container principal -->
+    <div class="game-container" style="display: none;">
+        <div class="road-effects">
+            <div class="road-line"></div>
+            <div class="road-line"></div>
+            <div class="road-line"></div>
+        </div>
+
+        <div class="streetlights">
+            <div class="streetlight"></div>
+            <div class="streetlight"></div>
+            <div class="streetlight"></div>
+        </div>
+
+        <!-- Ajout des effets de pluie -->
+        <div class="rain"></div>
+
+        <!-- Section du menu principal -->
+        <main class="menu-container">
+            <h1 class="neon-title" data-text="TAXI Road">TAXI Road</h1>
+
+            <div class="menu-buttons">
+                <button class="menu-button credits-button" data-navigate="regles.html">En route</button>
+                <button class="menu-button credits-button" data-navigate="credits.html">Crédits</button>
+            </div>
+        </main>
+        <script src="scripts/menu.js"></script>
+        <script src="scripts/transition.js"></script>
+        <script src="scripts/navigation.js"></script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+    <!-- Interface principale qui représente le tableau de bord -->
+<div class="dashboard">
+    <!-- Barre d'état en haut -->
+    <header class="status-bar">
+        <div class="money">
+            <img src="/api/placeholder/24/24" alt="icône argent" />
+            <span>1250 €</span>
+        </div>
+        <div class="mental-health">
+            <img src="/api/placeholder/24/24" alt="icône santé mentale" />
+            <div class="health-bar">
+                <div class="health-fill"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Vue principale du tableau de bord -->
+    <main class="dashboard-view">
+        <!-- Radio du véhicule -->
+        <div class="car-radio">
+            <div class="radio-screen">
+                <div class="frequency-display">98.5 MHz</div>
+                <div class="station-name">Radio Jazz</div>
+            </div>
+            <div class="radio-controls">
+                <button class="radio-button power"></button>
+                <input type="range" class="frequency-knob" min="87.5" max="108.0" step="0.1" value="98.5">
+                <button class="radio-button preset-1">1</button>
+                <button class="radio-button preset-2">2</button>
+                <button class="radio-button preset-3">3</button>
+            </div>
+        </div>
+
+        <!-- GPS avec Google Maps -->
+        <div class="gps-screen">
+            <div class="gps-header">
+                <span class="current-location">Paris, 75001</span>
+                <span class="gps-status">GPS Actif</span>
+            </div>
+            <div class="map-container">
+                <!-- Emplacement pour l'API Google Maps -->
+                <img src="/api/placeholder/400/300" alt="Carte GPS" />
+            </div>
+        </div>
+
+        <!-- Téléphone pour les courses -->
+        <div class="phone">
+            <!-- État replié par défaut -->
+            <div class="phone-preview">
+                <img src="/api/placeholder/64/64" alt="icône téléphone" />
+                <span class="notification-badge">3</span>
+            </div>
+
+            <!-- État déplié avec les courses -->
+            <div class="phone-expanded" hidden>
+                <header class="phone-header">
+                    <h2>Courses Disponibles</h2>
+                    <button class="close-phone">×</button>
+                </header>
+
+                <div class="rides-list">
+                    <!-- Template pour une course -->
+                    <article class="ride-preview">
+                        <div class="ride-basic-info">
+                            <span class="pickup">Gare du Nord</span>
+                            <span class="arrow">→</span>
+                            <span class="destination">Aéroport CDG</span>
+                            <span class="estimated-price">45 €</span>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Détails d'une course (affiché au clic) -->
+                <div class="ride-details" hidden>
+                    <div class="client-profile">
+                        <img src="/api/placeholder/120/120" alt="Photo du client" />
+                        <h3>Jean Dupont</h3>
+                        <p class="client-description">
+                            Homme d'affaires, 42 ans. Voyage fréquent entre Paris et CDG.
+                            Préfère une conduite calme et la radio classique.
+                        </p>
+                    </div>
+                    <div class="ride-specific-info">
+                        <p class="pickup-time">Départ : 14h30</p>
+                        <p class="estimated-duration">Durée estimée : 45 min</p>
+                        <p class="distance">Distance : 27 km</p>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="accept-ride">Accepter</button>
+                        <button class="decline-ride">Refuser</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<script src="game.js"></script>
+    
+</body>
+</html>

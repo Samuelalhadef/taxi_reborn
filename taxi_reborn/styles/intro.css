@@ -1,0 +1,388 @@
+/* Réinitialisation et styles de base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000;
+    font-family: 'Arial', sans-serif;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.game-container {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    background: linear-gradient(0deg, 
+        rgba(0,0,0,1) 0%,
+        rgba(1,0,20,1) 50%,
+        rgba(0,0,0,1) 100%
+    );
+}
+
+/* Effet de route */
+.road-effects {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    perspective: 1000px;
+}
+
+.road-line {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 40px,
+        rgba(255, 255, 255, 0.1) 40px,
+        rgba(255, 255, 255, 0.1) 80px
+    );
+    transform: rotateX(60deg);
+    animation: moveRoad 3s linear infinite;
+}
+
+/* Lampadaires avec lueur bleue */
+.streetlights {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.streetlight {
+    position: absolute;
+    width: 4px;
+    height: 150px;
+    background: linear-gradient(to bottom, #444, #222);
+}
+
+.streetlight::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -98px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, 
+        rgba(0, 149, 255, 0.2) 0%,
+        rgba(0, 89, 255, 0.1) 40%,
+        transparent 70%
+    );
+    animation: flickerLight 4s infinite;
+}
+
+/* Container du menu */
+.menu-container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    gap: 2rem;
+}
+
+/* Titre néon avec effet instable */
+.neon-title {
+    font-size: 5rem;
+    font-weight: bold;
+    color: #fff;
+    text-transform: uppercase;
+    text-shadow: 
+        0 0 5px #fff,
+        0 0 10px #f00,
+        0 0 20px #f00,
+        0 0 40px #f00,
+        0 0 80px #f00;
+    animation: unstableNeon 2s infinite;
+}
+
+/* Boutons du menu */
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.menu-button {
+    padding: 1.2rem 2.5rem;
+    font-size: 1.5rem;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid #f00;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-button:hover {
+    background: rgba(255, 0, 0, 0.2);
+    border-color: #00f;
+    text-shadow: 0 0 5px #fff;
+    box-shadow: 
+        0 0 10px rgba(255, 0, 0, 0.5),
+        0 0 20px rgba(0, 0, 255, 0.3);
+}
+
+/* Animation du néon instable */
+@keyframes unstableNeon {
+    0% {
+        opacity: 1;
+        text-shadow: 
+            0 0 5px #fff,
+            0 0 10px #f00,
+            0 0 20px #f00,
+            0 0 40px #f00,
+            0 0 80px #f00;
+    }
+    5% {
+        opacity: 0.2;
+        text-shadow: none;
+    }
+    6% {
+        opacity: 1;
+        text-shadow: 
+            0 0 5px #fff,
+            0 0 10px #f00,
+            0 0 20px #f00,
+            0 0 40px #f00;
+    }
+    90% {
+        opacity: 1;
+        text-shadow: 
+            0 0 5px #fff,
+            0 0 10px #f00,
+            0 0 20px #f00,
+            0 0 40px #f00;
+    }
+    95% {
+        opacity: 0.3;
+        text-shadow: none;
+    }
+    100% {
+        opacity: 1;
+        text-shadow: 
+            0 0 5px #fff,
+            0 0 10px #f00,
+            0 0 20px #f00,
+            0 0 40px #f00;
+    }
+}
+
+/* Animation de la route */
+@keyframes moveRoad {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 0 160px;
+    }
+}
+
+/* Animation des lumières de lampadaires */
+@keyframes flickerLight {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 0.4; }
+}
+
+/* Positionnement des lampadaires */
+.streetlight:nth-child(1) { 
+    left: 20%; 
+    height: 180px;
+}
+.streetlight:nth-child(2) { 
+    left: 50%; 
+    height: 150px;
+}
+.streetlight:nth-child(3) { 
+    left: 80%; 
+    height: 200px;
+}
+
+/* Ajout d'un effet de brouillard rouge/bleu */
+.game-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 30% 30%, 
+            rgba(255, 0, 0, 0.1) 0%,
+            transparent 50%),
+        radial-gradient(circle at 70% 70%, 
+            rgba(0, 0, 255, 0.1) 0%,
+            transparent 50%);
+    pointer-events: none;
+}
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 1s;
+}
+
+.loader {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #333;
+    border-top: 5px solid #f00;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.loading-text {
+    color: #f00;
+    font-size: 1.5rem;
+    margin-top: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.loading-progress {
+    color: #fff;
+    font-size: 2rem;
+    margin-top: 10px;
+}
+
+/* Effet de pluie */
+.rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.raindrop {
+    position: absolute;
+    width: 1px;
+    height: 20px;
+    background: linear-gradient(transparent, rgba(0, 149, 255, 0.5));
+    animation: rain linear infinite;
+}
+
+/* Animations */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes rain {
+    0% {
+        transform: translateY(-100vh);
+    }
+    100% {
+        transform: translateY(100vh);
+    }
+}
+
+/* Bouton de démarrage audio */
+.audio-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid #f00;
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.audio-button:hover {
+    transform: scale(1.1);
+    border-color: #00f;
+    box-shadow: 
+        0 0 10px rgba(255, 0, 0, 0.5),
+        0 0 20px rgba(0, 0, 255, 0.3);
+}
+
+.audio-icon {
+    position: relative;
+    width: 24px;
+    height: 24px;
+}
+
+.audio-icon svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    fill: #fff;
+    transition: opacity 0.3s ease;
+}
+
+.icon-sound-off {
+    opacity: 0;
+}
+
+.audio-button.muted .icon-sound-on {
+    opacity: 0;
+}
+
+.audio-button.muted .icon-sound-off {
+    opacity: 1;
+}
+
+/* Animation des ondes sonores */
+.sound-wave {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 2;
+    opacity: 0.8;
+    animation: soundWave 1s infinite;
+}
+
+.audio-button.muted .sound-wave {
+    animation: none;
+    stroke: #f00;
+}
+
+@keyframes soundWave {
+    0% {
+        opacity: 0.3;
+        transform: scale(0.8);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0.3;
+        transform: scale(0.8);
+    }
+}
+
+/* Effet néon sur le bouton quand actif */
+.audio-button:not(.muted) {
+    box-shadow: 
+        0 0 5px rgba(255, 0, 0, 0.5),
+        0 0 10px rgba(0, 0, 255, 0.3);
+}

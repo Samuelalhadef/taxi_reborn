@@ -1,0 +1,66 @@
+/* Conteneur de la transition */
+.page-transition {
+    position: fixed;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+/* Motif du taxi */
+.taxi-pattern {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, 
+        #FFD700 0%,
+        #FFD700 90%,
+        #FFD700 90%
+    );
+}
+
+/* Bande damier */
+.taxi-pattern::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background-image: 
+        linear-gradient(45deg, #000 25%, transparent 25%),
+        linear-gradient(-45deg, #000 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #000 75%),
+        linear-gradient(-45deg, transparent 75%, #000 75%);
+    background-size: 50px 50px;
+    background-position: 0 0, 0 25px, 25px -25px, -25px 0px;
+    animation: patternScroll 1s linear infinite;
+}
+
+/* États de transition */
+.transitioning-down {
+    transform: translateY(100%);
+    transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.transitioning-up {
+    transform: translateY(200%);
+    transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+/* Animation du motif damier */
+@keyframes patternScroll {
+    from {
+        background-position: 0 0, 0 25px, 25px -25px, -25px 0px;
+    }
+    to {
+        background-position: 50px 0, 50px 25px, 75px -25px, 25px 0px;
+    }
+}
+
+/* Styles pour empêcher le scroll pendant la transition */
+body.transitioning {
+    overflow: hidden;
+}

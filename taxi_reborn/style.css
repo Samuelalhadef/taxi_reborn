@@ -1,0 +1,413 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0a0a0f;
+    color: #e0e0e0;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Effets d'ambiance et arrière-plan
+-------------------------------------------------- */
+/* Effet de brouillard animé */
+.fog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg,
+        rgba(20, 20, 30, 0.1),
+        rgba(20, 20, 30, 0.2));
+    animation: fogMove 20s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Arrière-plan de la ville avec effet parallaxe */
+.city-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg, 
+        rgba(0,0,0,0.9) 0%, 
+        rgba(0,0,0,0.3) 100%);
+    z-index: 0;
+}
+
+/* Effet de pluie */
+.rain-effect {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.rain-drops {
+    width: 100%;
+    height: 100%;
+    background: 
+        repeating-linear-gradient(transparent 0%,
+        rgba(255,255,255,0.1) 90%,
+        transparent 100%);
+    animation: rain 0.5s linear infinite;
+}
+
+/* Container principal
+-------------------------------------------------- */
+.main-container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    z-index: 3;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Section titre
+-------------------------------------------------- */
+.title-section {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.logo-container {
+    position: relative;
+    perspective: 1000px;
+}
+
+/* Titres avec effet néon */
+.neon-title {
+    font-size: 5rem;
+    font-weight: bold;
+    color: #ff003c;
+    text-shadow: 
+        0 0 5px #ff003c,
+        0 0 10px #ff003c,
+        0 0 20px #ff003c,
+        0 0 40px #ff003c;
+    opacity: 0;
+    transform: translateZ(0);
+    transition: all 0.5s ease;
+}
+
+.neon-subtitle {
+    font-size: 2.5rem;
+    color: #0ff;
+    text-shadow: 
+        0 0 5px #0ff,
+        0 0 10px #0ff,
+        0 0 20px #0ff;
+    opacity: 0;
+    transform: translateZ(-50px);
+    transition: all 0.5s ease;
+}
+
+/* Horloge digitale */
+.digital-clock {
+    font-family: 'Courier New', monospace;
+    font-size: 2rem;
+    color: #ff0000;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    margin: 1rem 0;
+    letter-spacing: 3px;
+}
+
+/* Section histoire
+-------------------------------------------------- */
+.story-section {
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.story-container {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 
+        0 0 20px rgba(0, 0, 0, 0.5),
+        inset 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.story-header {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 1rem;
+}
+
+.story-title {
+    font-size: 1.5rem;
+    color: #ff003c;
+    margin-bottom: 0.5rem;
+}
+
+.story-metadata {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.story-content {
+    font-family: 'Courier New', monospace;
+    line-height: 1.8;
+    color: #b0b0b0;
+}
+
+.story-paragraph {
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+/* Bouton de démarrage
+-------------------------------------------------- */
+.neon-button {
+    background: transparent;
+    border: 2px solid #ff003c;
+    color: #ff003c;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+.neon-button:hover {
+    background: #ff003c;
+    color: #fff;
+    box-shadow: 
+        0 0 10px #ff003c,
+        0 0 20px #ff003c,
+        0 0 40px #ff003c;
+}
+
+.button-glow {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 0, 60, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.neon-button:hover .button-glow {
+    left: 100%;
+}
+
+/* Écran de chargement
+-------------------------------------------------- */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0a0a0f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 1s ease;
+}
+
+.loading-content {
+    text-align: center;
+}
+
+.loading-bar {
+    width: 200px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.loading-progress {
+    width: 0%;
+    height: 100%;
+    background: #ff003c;
+    transition: width 0.2s ease;
+}
+
+/* Animations
+-------------------------------------------------- */
+@keyframes fogMove {
+    0% { transform: translate(-10%, -10%); }
+    100% { transform: translate(10%, 10%); }
+}
+
+@keyframes rain {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 0% 20%; }
+}
+
+@keyframes intenseFlicker {
+    0%, 100% { opacity: 1; }
+    25% { opacity: 0.3; }
+    50% { opacity: 0.1; }
+    75% { opacity: 0.4; }
+}
+
+@keyframes softFlicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+
+/* Classes utilitaires
+-------------------------------------------------- */
+.hidden {
+    display: none;
+}
+
+.visible {
+    opacity: 1 !important;
+}
+
+/* Media Queries pour la réactivité
+-------------------------------------------------- */
+@media (max-width: 768px) {
+    .neon-title {
+        font-size: 3rem;
+    }
+
+    .neon-subtitle {
+        font-size: 1.8rem;
+    }
+
+    .story-container {
+        padding: 1.5rem;
+    }
+
+    .story-content {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-height: 700px) {
+    .story-container {
+        max-height: 50vh;
+        overflow-y: auto;
+    }
+}
+
+.neon-button {
+    /* ... autres styles ... */
+    opacity: 0;
+    visibility: hidden; /* Ajout de cette ligne */
+    transition: all 0.5s ease; /* Modification de la transition */
+}
+
+.neon-button.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 1s;
+}
+
+.loader {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #333;
+    border-top: 5px solid #f00;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.loading-text {
+    color: #f00;
+    font-size: 1.5rem;
+    margin-top: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.loading-progress {
+    color: #fff;
+    font-size: 2rem;
+    margin-top: 10px;
+}
+
+/* Effet de pluie */
+.rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.raindrop {
+    position: absolute;
+    width: 1px;
+    height: 20px;
+    background: linear-gradient(transparent, rgba(0, 149, 255, 0.5));
+    animation: rain linear infinite;
+}
+
+/* Animations */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes rain {
+    0% {
+        transform: translateY(-100vh);
+    }
+    100% {
+        transform: translateY(100vh);
+    }
+}
+
+/* Bouton de démarrage audio */
+.start-audio {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 1rem 2rem;
+    background: rgba(255, 0, 0, 0.2);
+    border: 1px solid #f00;
+    color: #fff;
+    cursor: pointer;
+    z-index: 1001;
+}

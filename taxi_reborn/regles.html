@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Night Shift - Le Jeu du Chauffeur de Taxi</title>
+    <link rel="stylesheet" href="styles/regles.css">
+</head>
+<body>
+    <!-- Effets d'ambiance -->
+    <div class="rain"></div>
+    <div class="scanlines"></div>
+    <button id="skip-button" class="skip-button">
+        <span class="skip-text">SKIP</span>
+        <span class="skip-icon">⏭️</span>
+    </button>
+
+    <main class="container">
+        <!-- Introduction -->
+        <section id="intro" class="narrative-section" data-voice="intro">
+            <h1 class="title">Night Shift</h1>
+            <div class="text-content">
+                <p>
+                    Les rues de cette ville sont comme des artères battantes dans la nuit. Depuis votre taxi, vous observez 
+                    la danse incessante des néons qui se reflètent dans les flaques de pluie. Cette ville ne dort jamais, 
+                    et vous non plus. Vous ne pouvez pas vous le permettre.
+                </p>
+            </div>
+        </section>
+
+        <!-- Histoire personnelle -->
+        <section id="personal-story" class="narrative-section" data-voice="story">
+            <div class="text-content">
+                <p>
+                    À la maison, votre famille compte sur vous. Les factures s'accumulent sur la table de la cuisine, 
+                    et le loyer ne va pas se payer tout seul. Chaque course compte, chaque client est une opportunité, 
+                    mais aussi un risque potentiel.
+                </p>
+            </div>
+        </section>
+
+        <!-- Règles de survie -->
+        <section id="survival-rules" class="narrative-section" data-voice="rules">
+            <h2 class="subtitle">Les Règles de la Nuit</h2>
+            <div class="text-content">
+                <p>
+                    Votre mission est simple mais périlleuse : gagnez suffisamment d'argent pour maintenir votre famille 
+                    à flot. Chaque jour apporte son lot de dépenses inévitables. Un échec signifie la rue pour vous et 
+                    les vôtres. La compagnie de taxi n'est pas connue pour sa patience avec les mauvais performeurs.
+                </p>
+            </div>
+        </section>
+
+        <!-- Santé mentale -->
+        <section id="mental-health" class="narrative-section" data-voice="mental">
+            <div class="text-content">
+                <p>
+                    Mais la nuit prélève son tribut. Votre santé mentale est aussi précieuse que fragile. Les longues heures, 
+                    les clients difficiles, la musique qui tourne en boucle... tout cela s'accumule. Si votre esprit craque, 
+                    c'est plus que votre travail que vous risquez de perdre.
+                </p>
+            </div>
+        </section>
+
+        <!-- Système de clients -->
+        <section id="client-system" class="narrative-section" data-voice="clients">
+            <div class="text-content">
+                <p>
+                    Chaque client est une histoire unique. Certains préfèrent le jazz tard dans la nuit, d'autres le silence 
+                    total. Vitesse, itinéraire, musique - leurs exigences varient autant que leurs personnalités. Lisez 
+                    attentivement leurs profils avant d'accepter une course. Un client satisfait peut être généreux avec 
+                    les pourboires, mais un client mécontent peut faire basculer votre nuit dans le chaos.
+                </p>
+            </div>
+        </section>
+
+        <!-- Avertissement final -->
+        <section id="final-warning" class="narrative-section" data-voice="warning">
+            <div class="text-content">
+                <p>
+                    La ville attend. Derrière chaque client se cache une histoire, derrière chaque course un défi. 
+                    Votre taxi est plus qu'un simple véhicule - c'est votre dernier rempart contre la misère. 
+                    Saurez-vous maintenir l'équilibre entre profit et santé mentale ?
+                </p>
+            </div>
+        </section>
+
+        <!-- Bouton de démarrage -->
+        <div id="start-section" class="narrative-section">
+            <button id="start-game" class="start-button" data-voice="start">
+                Prendre le Volant
+            </button>
+        </div>
+    </main>
+
+    <!-- Audio elements -->
+    <audio id="ambient-rain" loop>
+        <source src="assets/audio/rain-ambiance.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="ambient-city" loop>
+        <source src="assets/audio/city-ambiance.mp3" type="audio/mpeg">
+    </audio>
+    <script src="scripts/regles.js"></script>
+</body>
+</html>

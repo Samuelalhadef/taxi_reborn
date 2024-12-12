@@ -1,0 +1,370 @@
+/* Variables globales pour une cohérence visuelle */
+:root {
+    /* Palette de couleurs néon */
+    --neon-blue: #00f3ff;
+    --neon-red: #ff0033;
+    --neon-purple: #bc13fe;
+    --neon-yellow: #fff35c;
+    
+    /* Couleurs de fond et de texte */
+    --bg-dark: #090909;
+    --bg-darker: #050505;
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    
+    /* Effets de flou et d'ombre */
+    --blur-light: blur(3px);
+    --blur-heavy: blur(10px);
+    --glow-strength: 20px;
+}
+
+/* Reset et styles de base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: 'Industry', 'Rajdhani', sans-serif;
+    line-height: 1.6;
+    overflow: hidden;
+    min-height: 100vh;
+}
+
+/* Container principal avec effet de profondeur */
+.container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: 100vh;
+    background: radial-gradient(
+        circle at center,
+        rgba(29, 38, 113, 0.2) 0%,
+        var(--bg-darker) 100%
+    );
+}
+
+/* Effets de pluie */
+.rain-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.raindrop {
+    position: absolute;
+    width: 1px;
+    height: 20px;
+    background: linear-gradient(
+        transparent,
+        rgba(var(--neon-blue), 0.3)
+    );
+    animation: rain-fall linear infinite;
+}
+
+/* Effets de néon et de reflets */
+.neon-reflections {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.neon-reflection {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.1;
+    animation: neon-pulse 3s infinite;
+}
+
+.neon-reflection.red {
+    background: radial-gradient(
+        circle at 30% 50%,
+        var(--neon-red) 0%,
+        transparent 50%
+    );
+}
+
+.neon-reflection.blue {
+    background: radial-gradient(
+        circle at 70% 30%,
+        var(--neon-blue) 0%,
+        transparent 50%
+    );
+    animation-delay: 1s;
+}
+
+.neon-reflection.purple {
+    background: radial-gradient(
+        circle at 50% 70%,
+        var(--neon-purple) 0%,
+        transparent 50%
+    );
+    animation-delay: 2s;
+}
+
+/* Sections de texte narratif */
+.narrative-section {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    backdrop-filter: var(--blur-light);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-bottom: 2rem;
+}
+
+.narrative-section:hover {
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 var(--glow-strength) rgba(0, 243, 255, 0.2);
+}
+
+/* Styles de texte et titres */
+h1 {
+    font-size: 4rem;
+    text-align: center;
+    color: var(--neon-purple);
+    text-transform: uppercase;
+    letter-spacing: 0.5rem;
+    margin: 2rem 0;
+    animation: title-glow 3s ease-in-out infinite;
+}
+
+h2 {
+    font-size: 2rem;
+    color: var(--neon-blue);
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 10px var(--neon-blue);
+}
+
+p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.8;
+}
+
+/* Boutons et contrôles */
+.start-button {
+    display: block;
+    margin: 2rem auto;
+    padding: 1rem 3rem;
+    font-size: 1.2rem;
+    color: var(--neon-blue);
+    background: transparent;
+    border: 2px solid var(--neon-blue);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+}
+
+.start-button:hover {
+    background: rgba(0, 243, 255, 0.1);
+    box-shadow: 0 0 20px var(--neon-blue);
+}
+
+.start-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 243, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.start-button:hover::before {
+    left: 100%;
+}
+
+/* Skip button */
+.skip-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 0.5rem 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--text-secondary);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.skip-button:hover {
+    color: var(--neon-yellow);
+    border-color: var(--neon-yellow);
+    box-shadow: 0 0 10px var(--neon-yellow);
+}
+
+/* Animations */
+@keyframes rain-fall {
+    0% {
+        transform: translateY(-100vh);
+    }
+    100% {
+        transform: translateY(100vh);
+    }
+}
+
+@keyframes neon-pulse {
+    0%, 100% {
+        opacity: 0.1;
+    }
+    50% {
+        opacity: 0.2;
+    }
+}
+
+@keyframes title-glow {
+    0%, 100% {
+        text-shadow: 
+            0 0 10px var(--neon-purple),
+            0 0 20px var(--neon-purple),
+            0 0 30px var(--neon-purple);
+    }
+    50% {
+        text-shadow: 
+            0 0 20px var(--neon-purple),
+            0 0 30px var(--neon-purple),
+            0 0 40px var(--neon-purple);
+    }
+}
+
+/* Indicateur de défilement */
+.scroll-indicator {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.scroll-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.scroll-dot.active {
+    background: var(--neon-blue);
+    box-shadow: 0 0 10px var(--neon-blue);
+}
+
+/* Effets de transition */
+.fade-in {
+    animation: fadeIn 0.5s ease-in forwards;
+}
+
+.fade-out {
+    animation: fadeOut 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* Media Queries pour la responsivité */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .narrative-section {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+
+    .skip-button {
+        top: 10px;
+        right: 10px;
+        padding: 0.3rem 1rem;
+    }
+
+    .scroll-indicator {
+        right: 10px;
+    }
+}
+
+/* Animation de glitch pour le texte */
+.glitch {
+    position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.glitch::before {
+    left: 2px;
+    text-shadow: -2px 0 var(--neon-red);
+    animation: glitch-anim-1 2s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+    left: -2px;
+    text-shadow: 2px 0 var(--neon-blue);
+    animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim-1 {
+    0% {
+        clip-path: inset(20% 0 30% 0);
+    }
+    100% {
+        clip-path: inset(10% 0 60% 0);
+    }
+}
+
+@keyframes glitch-anim-2 {
+    0% {
+        clip-path: inset(40% 0 10% 0);
+    }
+    100% {
+        clip-path: inset(50% 0 20% 0);
+    }
+}

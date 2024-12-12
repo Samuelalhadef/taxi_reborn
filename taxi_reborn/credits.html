@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAXI Road - Crédits</title>
+    <style>
+        /* Réinitialisation et styles de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            min-height: 100vh;
+        }
+
+        /* Conteneur principal avec scroll */
+        .credits-container {
+            position: relative;
+            min-height: 100vh;
+            background: radial-gradient(circle at center, #1a0000 0%, #000000 100%);
+            /* Permettre le scroll tout en gardant le dégradé fixe */
+            background-attachment: fixed;
+        }
+
+        /* Effet de pluie en arrière-plan fixe */
+        .rain {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Conteneur pour le texte scrollable */
+        .credits-content {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 6rem 2rem 10rem 2rem; /* Espace pour le bouton de retour */
+            z-index: 2;
+        }
+
+        /* En-tête fixe avec le nom du développeur */
+        .dev-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to bottom, 
+                rgba(0, 0, 0, 0.9) 0%,
+                rgba(0, 0, 0, 0.7) 70%,
+                transparent 100%);
+            padding: 2rem 0;
+            text-align: center;
+            z-index: 3;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+
+        .dev-title {
+            font-size: 1.5rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .dev-name {
+            font-size: 3.5rem;
+            color: #ff0000;
+            text-shadow: 
+                0 0 5px #ff0000,
+                0 0 10px #ff0000,
+                0 0 20px #ff0000;
+            animation: neonPulse 2s infinite;
+        }
+
+        /* Paragraphes des crédits */
+        .credit-paragraph {
+            margin: 3rem 0;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.5);
+            border-left: 3px solid #ff0000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(-20px);
+        }
+
+        .credit-paragraph.visible {
+            animation: revealText 2s forwards;
+        }
+
+        /* Navigation fixe en bas */
+        .navigation {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem;
+            background: linear-gradient(to top, 
+                rgba(0, 0, 0, 0.9) 0%,
+                rgba(0, 0, 0, 0.7) 70%,
+                transparent 100%);
+            display: flex;
+            justify-content: center;
+            z-index: 3;
+        }
+
+        .return-button {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: 2px solid #ff0000;
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+            animation-delay: 8s;
+        }
+
+        .return-button:hover {
+            background: rgba(255, 0, 0, 0.2);
+            text-shadow: 0 0 5px #fff;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+
+        /* Contrôle audio */
+        .audio-control {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: transparent;
+            border: 2px solid #ff0000;
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 4;
+        }
+
+        .audio-control:hover {
+            background: rgba(255, 0, 0, 0.2);
+            transform: scale(1.1);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes revealText {
+            from {
+                opacity: 0;
+                visibility: visible;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                visibility: visible;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes neonPulse {
+            0%, 100% {
+                text-shadow: 
+                    0 0 5px #ff0000,
+                    0 0 10px #ff0000,
+                    0 0 20px #ff0000;
+            }
+            50% {
+                text-shadow: 
+                    0 0 10px #ff0000,
+                    0 0 20px #ff0000,
+                    0 0 30px #ff0000;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Éléments audio -->
+    <audio id="backgroundMusic" loop>
+        <source src="sound/music_ambiance.mp3" type="audio/mp3">
+    </audio>
+    <audio id="rainSound" loop>
+        <source src="sound/rain.mp3" type="audio/mp3">
+    </audio>
+
+    <div class="credits-container">
+        <div class="rain" id="rainContainer"></div>
+
+        <div class="dev-header">
+            <div class="dev-title">Développé par</div>
+            <div class="dev-name">Samuel Alhadef</div>
+        </div>
+
+        <button class="audio-control" id="audioToggle">
+            <span>♪</span>
+        </button>
+
+        <div class="credits-content">
+            <!-- [Les paragraphes restent les mêmes] -->
+            <div class="credit-paragraph">
+                Dans les rues de Paris, où les lumières des réverbères se fondent dans la brume nocturne, j'ai retrouvé mes premières lignes de code. TAXI Road renaît des cendres de mon passé, comme un écho à mes premiers pas dans la programmation, quand tout semblait possible et que chaque fonction était une nouvelle aventure.
+            </div>
+            
+            <div class="credit-paragraph">
+                C'est étrange comme la mélancolie d'une ville peut résonner avec celle du code. Sur les boulevards parisiens, je me sens parfois comme Travis, perdu dans un océan de néons et de solitude. Ces nuits où le ciel est trop bas, où les rues semblent se refermer sur elles-mêmes, j'ai choisi de plonger dans mon éditeur de code, de reconstruire ce projet qui fut mon premier compagnon de route.
+            </div>
+            
+            <div class="credit-paragraph">
+                Chaque variable renommée est un souvenir qui remonte à la surface, chaque boucle optimisée est une leçon apprise. Le code original était maladroit, naïf peut-être, mais il portait en lui une sincérité que j'ai voulu préserver. Comme ces taxis qui sillonnent Paris sous la pluie, il traçait sa route sans se soucier de l'élégance de sa trajectoire.
+            </div>
+            
+            <div class="credit-paragraph">
+                La ville m'étouffe parfois, ses murs semblent se rapprocher dans la grisaille des jours qui se répètent. Mais dans ce remake, j'ai trouvé un refuge, une façon de transformer cette mélancolie en quelque chose de tangible. Le code est devenu mon taxi, m'emmenant loin des rues trop étroites de ma réalité quotidienne.
+            </div>
+            
+            <div class="credit-paragraph">
+                "Les bugs d'hier sont devenus les features d'aujourd'hui, et dans ce labyrinthe de syntaxe et de souvenirs, j'ai redécouvert pourquoi j'avais commencé à coder. Parfois, il faut se perdre pour mieux se retrouver."
+            </div>
+            
+        </div>
+
+        <div class="navigation">
+            <button class="return-button" data-navigate="intro.html">Retour au Menu</button>
+        </div>
+    </div>
+
+    <script>
+        // Gestionnaire audio
+        class AudioManager {
+            constructor() {
+                this.backgroundMusic = document.getElementById('backgroundMusic');
+                this.rainSound = document.getElementById('rainSound');
+                this.audioToggle = document.getElementById('audioToggle');
+                this.isPlaying = false;
+                this.setupAudio();
+            }
+
+            setupAudio() {
+                this.audioToggle.addEventListener('click', () => this.toggleAudio());
+                this.backgroundMusic.volume = 0.4;
+                this.rainSound.volume = 0.3;
+            }
+
+            async toggleAudio() {
+                if (this.isPlaying) {
+                    await this.fadeOut(this.backgroundMusic);
+                    await this.fadeOut(this.rainSound);
+                    this.backgroundMusic.pause();
+                    this.rainSound.pause();
+                } else {
+                    this.backgroundMusic.play();
+                    this.rainSound.play();
+                    await this.fadeIn(this.backgroundMusic);
+                    await this.fadeIn(this.rainSound);
+                }
+                this.isPlaying = !this.isPlaying;
+            }
+
+            async fadeIn(audio) {
+                audio.volume = 0;
+                const targetVolume = audio === this.backgroundMusic ? 0.4 : 0.3;
+                await this.fade(audio, 0, targetVolume);
+            }
+
+            async fadeOut(audio) {
+                await this.fade(audio, audio.volume, 0);
+            }
+
+            fade(audio, start, end) {
+                return new Promise(resolve => {
+                    const duration = 1000;
+                    const startTime = performance.now();
+                    
+                    const updateVolume = (currentTime) => {
+                        const elapsed = currentTime - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+                        
+                        audio.volume = start + (end - start) * progress;
+                        
+                        if (progress < 1) {
+                            requestAnimationFrame(updateVolume);
+                        } else {
+                            resolve();
+                        }
+                    };
+
+                    requestAnimationFrame(updateVolume);
+                });
+            }
+        }
+
+        // Gestionnaire du texte progressif
+        class TextRevealManager {
+            constructor() {
+                this.paragraphs = document.querySelectorAll('.credit-paragraph');
+                this.currentIndex = 0;
+                this.delay = 2000; // Délai entre chaque paragraphe
+            }
+
+            start() {
+                this.revealNext();
+            }
+
+            revealNext() {
+                if (this.currentIndex < this.paragraphs.length) {
+                    this.paragraphs[this.currentIndex].classList.add('visible');
+                    this.currentIndex++;
+                    setTimeout(() => this.revealNext(), this.delay);
+                }
+            }
+        }
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', () => {
+            const audioManager = new AudioManager();
+            const textManager = new TextRevealManager();
+            
+            // Démarrer l'affichage progressif après un court délai
+            setTimeout(() => textManager.start(), 1000);
+        });
+    </script>
+    <script src="scripts/navigation.js"></script>
+</body>
+</html>
